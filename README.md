@@ -9,7 +9,7 @@ What if JavaScritp could chill a little bit with all the errors being thrown her
 ```js
 const parse = chilled(JSON.parse)
 
-let [ res, err ] = parse('{ "id": 1 }')
+let [ ok, err ] = parse('{ "id": 1 }')
 
 if (!err) {
   // Celebrate the success!
@@ -22,8 +22,8 @@ if (!err) {
 ## Async/Await
 
 ```js
-async function init() {
-  let [ res, err ] = await chilled(fetchUsers)
+async function() {
+  let [ ok, err ] = await chilled(fetchUsers)
   
   if (!err) {
     // Celebrate the success at async programming!
@@ -33,7 +33,12 @@ async function init() {
 }
 ```
 
-## Liks
+## Inspiration
 
-- https://package.elm-lang.org/packages/elm/core/latest/Result
 - https://blog.golang.org/error-handling-and-go
+- https://package.elm-lang.org/packages/elm/core/latest/Result
+
+## Worth Checking
+
+- [scopsy/await-to-js](https://github.com/scopsy/await-to-js)
+- [Data.Either](http://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Either.html)
