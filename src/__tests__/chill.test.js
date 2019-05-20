@@ -1,4 +1,4 @@
-const {chill} = require('../index.js');
+const {chill} = require('../chill.js');
 
 describe('chill', () => {
   it('should pass the arguments to the function', () => {
