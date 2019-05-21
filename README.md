@@ -4,7 +4,15 @@ What if JavaScritp could chill a little bit with all the errors being thrown her
 
 <img src="https://media.giphy.com/media/SGY6C4he2z8T6/giphy.gif" alt='Dr. Freeze saying "Everybody Chill!"'>
 
+| | null/undefined/NaN | try..catch and throw | Nodeback | Promise | chilled
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Sync  | :heavy_check_mark: | :heavy_check_mark: | | | :heavy_check_mark: |
+| Async |  | | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Error Context | :confused:  | :confused: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+
 ## Sync
+
+Helps to capture the error close to the context when working with functions which throw exceptions.
 
 ```js
 const parse = chill(JSON.parse)
@@ -19,6 +27,8 @@ console.log(ok)
 ```
 
 ## Async
+
+Removes exception bubbling when using Async Await.
 
 ```js
 async function() {
