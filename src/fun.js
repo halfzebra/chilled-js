@@ -1,8 +1,7 @@
 const { chill } = require('./chill');
 
-function isSuccess(res) {
-  const [ ok ] = res;
-  if (ok) {
+function isError([ _, err ]) {
+  if (err) {
     return true;
   }
   return false;
@@ -13,10 +12,9 @@ function fst([ fst ]) {
 }
 
 function map(fn) {
-  return m => isSuccess(m) ? chill(fn)(fst(m)) : m
+  return m => isError(m) ? m :  chill(fn)(fst(m))
 }
 
 module.exports = {
   map
 };
-
