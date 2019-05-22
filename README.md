@@ -1,6 +1,6 @@
 # chilled-js
 
-What if JavaScritp could chill a little bit with all the errors being thrown here and there?
+What if JavaScript could chill a little bit with all the errors being thrown here and there?
 
 <img src="https://media.giphy.com/media/SGY6C4he2z8T6/giphy.gif" alt='Dr. Freeze saying "Everybody Chill!"'>
 
