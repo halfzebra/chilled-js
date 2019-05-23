@@ -2,13 +2,13 @@
 
 What if JavaScript could chill a little bit with all the errors being thrown here and there?
 
-<img src="https://media.giphy.com/media/SGY6C4he2z8T6/giphy.gif" alt='Dr. Freeze saying "Everybody Chill!"'>
-
-| | null/undefined/NaN | try..catch and throw | Nodeback | Promise | chilled
+| | Nullable | try..catch and throw | Callback | Promise | chilled
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Sync  | :heavy_check_mark: | :heavy_check_mark: | | | :heavy_check_mark: |
 | Async |  | | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | Error Context | :confused:  | :confused: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+
+<img src="https://media.giphy.com/media/SGY6C4he2z8T6/giphy.gif" alt='Dr. Freeze saying "Everybody Chill!"'>
 
 ## Sync
 
