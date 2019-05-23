@@ -23,7 +23,7 @@ let [ err, ok ] = parse(...)
 | Sync  | :heavy_check_mark: | :heavy_check_mark: | | | :heavy_check_mark: |
 | Async |  | | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | Error Context | | :confused: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| Composeability | :heavy_check_mark: | | | :heavy_check_mark: | :heavy_check_mark: |
+| Composability | :heavy_check_mark: | | | :heavy_check_mark: | :heavy_check_mark: |
 
 <img src="https://media.giphy.com/media/SGY6C4he2z8T6/giphy.gif" alt='Dr. Freeze saying "Everybody Chill!"'>
 
