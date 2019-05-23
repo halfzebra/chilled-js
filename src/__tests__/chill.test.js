@@ -13,13 +13,13 @@ describe('chill', () => {
   it('should return the result as a first element of a tuple', () => {
     const parse = chill(JSON.parse);
 
-    expect(parse('{ "id": 1 }')).toMatchObject([{id: 1}, null])
+    expect(parse('{ "id": 1 }')).toMatchObject([null, {id: 1}])
   });
 
   it('should return the error as a second element of a tuple', () => {
     const parse = chill(JSON.parse);
 
-    expect(parse('{ "id": 1')).toMatchObject([null, new SyntaxError('Unexpected end of JSON input')])
+    expect(parse('{ "id": 1')).toMatchObject([new SyntaxError('Unexpected end of JSON input'), null])
   });
 
   it('should return the result from async function as a first element of a tuple', async () => {
@@ -28,7 +28,7 @@ describe('chill', () => {
     });
     const chilled = chill(asyncWork);
 
-    expect(await chilled()).toMatchObject(['done', null]);
+    expect(await chilled()).toMatchObject([null, 'done']);
   });
 
   it('should return the error from async function as a second element of a tuple', async () => {
@@ -37,7 +37,7 @@ describe('chill', () => {
     });
     const chilled = chill(asyncError);
 
-    expect(await chilled()).toMatchObject([null, new Error('boom')]);
+    expect(await chilled()).toMatchObject([new Error('boom'), null]);
   });
 
   it('should return the error in async function if the function itself throws', async () => {
@@ -46,6 +46,6 @@ describe('chill', () => {
     };
     const chilled = chill(asyncError);
 
-    expect(await chilled()).toMatchObject([null, new Error('boom')]);
+    expect(await chilled()).toMatchObject([new Error('boom'), null]);
   })
 });
