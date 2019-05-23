@@ -1,20 +1,28 @@
-const { chill } = require('./chill');
+const {chill} = require('./chill');
 
-function isError([ _, err ]) {
-  if (err) {
-    return true;
-  }
-  return false;
+function isError([err]) {
+  return !!err;
 }
 
-function fst([ fst ]) {
-  return fst
+function snd([_, y]) {
+  return y
 }
 
 function map(fn) {
-  return m => isError(m) ? m :  chill(fn)(fst(m))
+  return m => isError(m) ? m : chill(fn)(snd(m))
+}
+
+function flatMap(fn) {
+  return function (m) {
+    if (isError(m)) {
+      return m
+    }
+    const r = chill(fn)(snd(m));
+    return isError(r) ? r : snd(r);
+  }
 }
 
 module.exports = {
-  map
+  map,
+  flatMap
 };
