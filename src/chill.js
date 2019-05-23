@@ -3,11 +3,11 @@ function isPromise(obj) {
 }
 
 function success(x) {
-  return [x, null];
+  return [null, x];
 }
 
 function fail(err) {
-  return [null, err];
+  return [err, null];
 }
 
 function apply(fn, args) {
