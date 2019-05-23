@@ -1,11 +1,25 @@
+/**
+ * @param obj {?}
+ * @returns {boolean}
+ */
 function isPromise(obj) {
   return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function' && typeof obj.catch === 'function';
 }
 
+/**
+ * @template T
+ * @param x {T}
+ * @returns {[null, T]}
+ */
 function success(x) {
   return [null, x];
 }
 
+/**
+ * @template T
+ * @param err {T}
+ * @returns {[null, T]}
+ */
 function fail(err) {
   return [err, null];
 }
