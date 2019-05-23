@@ -2,22 +2,41 @@
 
 What if JavaScript could chill a little bit with all the errors being thrown here and there?
 
+## TL;DR
+
+```js
+function parse(raw) {
+  try {
+    return [ null, JSON.parse(raw) ]
+  } catch (err) {
+    return [ err, null ]
+  }
+}
+
+let [ err, ok ] = parse(...)
+```
+
+## Comparing to other kinds of error handling
+
 | | Nullable | try..catch and throw | Callback | Promise | chilled
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Sync  | :heavy_check_mark: | :heavy_check_mark: | | | :heavy_check_mark: |
 | Async |  | | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
-| Error Context | :confused:  | :confused: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Error Context | | :confused: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
+| Composeability | :heavy_check_mark: | | | :heavy_check_mark: | :heavy_check_mark: |
 
 <img src="https://media.giphy.com/media/SGY6C4he2z8T6/giphy.gif" alt='Dr. Freeze saying "Everybody Chill!"'>
 
-## Sync
+## Usage
+
+### Sync
 
 Helps to capture the error close to the context when working with functions which throw exceptions.
 
 ```js
 const parse = chill(JSON.parse)
 
-let [ ok, err ] = parse('{ "id": 1 }')
+let [ err, ok ] = parse('{ "id": 1 }')
 
 if (err) {
   // Handle the error.
@@ -26,13 +45,13 @@ if (err) {
 console.log(ok)
 ```
 
-## Async
+### Async
 
 Removes exception bubbling when using Async Await.
 
 ```js
-async function() {
-  let [ ok, err ] = await chill(fetchUsers)
+async function () {
+  let [ err, ok ] = await chill(fetchUsers)
   
   if (err) {
     // Handle the error.
