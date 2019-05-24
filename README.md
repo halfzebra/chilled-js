@@ -67,4 +67,4 @@ async function () {
 - [Error handling and Go](https://blog.golang.org/error-handling-and-go)
 - [Result](https://package.elm-lang.org/packages/elm/core/latest/Result) type from Elm
 - [Data.Either](http://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Either.html) type from Haskell
-- [scopsy/await-to-js](https://github.com/scopsy/await-to-js) a JavaScript library expliring a similar concept
+- [scopsy/await-to-js](https://github.com/scopsy/await-to-js) a JavaScript library exploring a similar concept
