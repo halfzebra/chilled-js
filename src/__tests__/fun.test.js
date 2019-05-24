@@ -1,4 +1,4 @@
-const {map,flatMap} = require('../fun');
+const { map, flatMap, withDefault } = require("../fun");
 
 describe('map', () => {
   it('should transform the value', () => {
@@ -40,4 +40,14 @@ describe('flatMap', () => {
       flatMap(x => [new Error('Sorry! Got an error.'), null])([null, 'Hello' ])
     ).toMatchObject([new Error('Sorry! Got an error.'), null])
   });
+});
+
+describe('withDefault', () => {
+  it('should return the original value if it did not contain the error', () => {
+    expect(withDefault(2)([null, 1])).toBe(1);
+  })
+
+  it('should return the default value if the input contained error', () => {
+    expect(withDefault(1)([new Error('No number!'), null])).toBe(1);
+  })
 });
