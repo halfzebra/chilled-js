@@ -18,7 +18,7 @@ let [ err, ok ] = parse(...)
 
 ## Comparing to other kinds of error handling
 
-| | Nullable | try..catch and throw | Callback | Promise | chilled
+| | Nullable | try..catch and throw | Callback | Promise | chilled |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Sync  | :heavy_check_mark: | :heavy_check_mark: | | | :heavy_check_mark: |
 | Async |  | | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
@@ -50,13 +50,17 @@ console.log(ok)
 Removes exception bubbling when using Async Await.
 
 ```js
+const url = 'https://jsonplaceholder.typicode.com/todos/1'
+
 async function () {
-  let [ err, ok ] = await chill(fetchUsers)
-  
+  let [ err, ok ] = await chill(
+    () => fetch(url).then(response => response.json())
+  )()
+
   if (err) {
     // Handle the error.
   }
-  
+
   // Celebrate the success at async programming!
   console.log(ok)
 }()
