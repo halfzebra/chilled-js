@@ -1,7 +1,8 @@
 {
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "test:ci": "jest --ci"
   },
   "devDependencies": {
     "jest": "^24.8.0"
