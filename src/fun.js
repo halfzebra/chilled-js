@@ -1,16 +1,20 @@
 // This module is purely experimental and not ready to be used.
-const {chill} = require('./chill');
+const { chill, fail } = require('./chill');
 
-function isError([err]) {
-  return !!err;
+function isError([ err ]) {
+	return !!err;
 }
 
-function snd([_, y]) {
-  return y
+function fst([ x ]) {
+	return x;
+}
+
+function snd([ _, y ]) {
+	return y;
 }
 
 function map(fn) {
-  return m => isError(m) ? m : chill(fn)(snd(m))
+	return (m) => (isError(m) ? m : chill(fn)(snd(m)));
 }
 
 // TODO:
@@ -18,10 +22,21 @@ function map(fn) {
 //
 // }
 
-// TODO:
-// function mapError(fn) {
-//
-// }
+function mapError(fn) {
+	return function(m) {
+		if (isError(m)) {
+			const res = chill(fn)(fst(m));
+
+			if (isError(res)) {
+				return res;
+      }
+
+			return fail(snd(res));
+		}
+
+		return m;
+	};
+}
 
 // TODO:
 // const chilledFn = compose(
@@ -34,23 +49,24 @@ function map(fn) {
 // chilledFn(15) // 5
 
 function flatMap(fn) {
-  return function(m) {
-    if (isError(m)) {
-      return m;
-    }
-    const r = chill(fn)(snd(m));
-    return isError(r) ? r : snd(r);
-  };
+	return function(m) {
+		if (isError(m)) {
+			return m;
+		}
+		const r = chill(fn)(snd(m));
+		return isError(r) ? r : snd(r);
+	};
 }
 
 function withDefault(v) {
-  return function(m) {
-    return isError(m) ? v : snd(m)
-  }
+	return function(m) {
+		return isError(m) ? v : snd(m);
+	};
 }
 
 module.exports = {
-  map,
-  flatMap,
-  withDefault
+	map,
+	mapError,
+	flatMap,
+	withDefault
 };
