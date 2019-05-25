@@ -3,7 +3,12 @@
  * @returns {boolean}
  */
 function isPromise(obj) {
-  return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function' && typeof obj.catch === 'function';
+	return (
+		!!obj &&
+		(typeof obj === 'object' || typeof obj === 'function') &&
+		typeof obj.then === 'function' &&
+		typeof obj.catch === 'function'
+	);
 }
 
 /**
@@ -12,7 +17,7 @@ function isPromise(obj) {
  * @returns {[null, T]}
  */
 function success(x) {
-  return [null, x];
+	return [ null, x ];
 }
 
 /**
@@ -21,26 +26,26 @@ function success(x) {
  * @returns {[null, T]}
  */
 function fail(err) {
-  return [err, null];
+	return [ err, null ];
 }
 
 function apply(fn, args) {
-  try {
-    const result = fn.apply(null, args);
-    return isPromise(result) ? result.then(success).catch(fail) : success(result);
-  } catch (err) {
-    return fail(err);
-  }
+	try {
+		const result = fn.apply(null, args);
+		return isPromise(result) ? result.then(success).catch(fail) : success(result);
+	} catch (err) {
+		return fail(err);
+	}
 }
 
 function chill(fn) {
-  return function chilled(...args) {
-    return apply(fn, args);
-  }
+	return function chilled(...args) {
+		return apply(fn, args);
+	};
 }
 
 module.exports = {
-  chill,
-  success,
-  fail
+	chill,
+	success,
+	fail
 };
