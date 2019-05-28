@@ -95,6 +95,20 @@ describe('pipe', () => {
   });
 
   it('should call functions from left to right', () => {
+    const fn1 = jest.fn(x => x + 1)
+    const fn2 = jest.fn(x => x + 1)
+    const fn3 = jest.fn(x => x + 1)
 
+    const p = pipe(
+      map(fn1),
+      map(fn2),
+      map(fn3),
+    );
+
+    p([null, 1])
+
+    expect(fn1).toHaveBeenCalledWith(1);
+    expect(fn2).toHaveBeenCalledWith(2);
+    expect(fn3).toHaveBeenCalledWith(3);
   });
 });
