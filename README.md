@@ -2,6 +2,8 @@
 
 What if JavaScript could chill a little bit with all the errors being thrown here and there?
 
+[![Build Status](https://travis-ci.org/halfzebra/chilled-js.svg?branch=master)](https://travis-ci.org/halfzebra/chilled-js)
+
 ## TL;DR
 
 ```js
