@@ -74,7 +74,9 @@ function mapError(fn) {
 
 function flatMap(fn) {
   if (!isFunction(fn)) {
-    throw new Error('flatMap: please pass a function for creating a new tuple for flattening.');
+    throw new Error(
+      'flatMap: please pass a function for creating a new tuple for flattening.'
+    );
   }
   return function(m) {
     if (isError(m)) {
