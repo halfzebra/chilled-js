@@ -44,6 +44,12 @@ describe('flatMap', () => {
       flatMap(x => [new Error('Sorry! Got an error.'), null])([null, 'Hello'])
     ).toMatchObject([new Error('Sorry! Got an error.'), null]);
   });
+
+  it('throw if no function provided', () => {
+    expect(() => flatMap()).toThrow(
+      'flatMap: please pass a function for creating a new tuple for flattening.'
+    );
+  });
 });
 
 describe('withDefault', () => {
@@ -111,4 +117,15 @@ describe('pipe', () => {
     expect(fn2).toHaveBeenCalledWith(2);
     expect(fn3).toHaveBeenCalledWith(3);
   });
+
+  it.skip('works with promises', async () => {
+    const p = pipe(
+      x => Promise.resolve(x),
+      map(x => parseInt(x)),
+      map(x => x + 1),
+      withDefault(5)
+    );
+
+    expect(p([null, '10'])).toBe(11);
+  })
 });
