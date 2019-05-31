@@ -1,5 +1,6 @@
-// XXX: This module is purely experimental and not ready to be used.
-const { chill, fail } = require('./chill');
+// XXX: This module is purely experimental and not ready for usage.
+
+const { chill, fail, isPromiseLike } = require('./chill');
 
 function isFunction(fn) {
   return typeof fn === 'function';
@@ -26,6 +27,8 @@ function log(label, x) {
   return x;
 }
 
+// XXX: maybe this not needed.
+// Similar to it.skip in test runners, allows for quick disabling of logging.
 log.off = function off(label, x) {
   if (!x) {
     return label;
@@ -37,9 +40,12 @@ function map(fn) {
   if (!isFunction(fn)) {
     throw new Error('map: needs a function to transform the value.');
   }
-  return function(m) {
+
+  function apply(m) {
     return isError(m) ? m : chill(fn)(snd(m));
-  };
+  }
+
+  return v => (isPromiseLike(v) ? v.then(apply) : apply.call(null, v));
 }
 
 function pipe(...fns) {

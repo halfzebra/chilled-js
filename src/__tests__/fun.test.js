@@ -21,6 +21,19 @@ describe('map', () => {
       })([null, true])
     ).toMatchObject([new Error('Booho!'), null]);
   });
+
+  it('works with promises that resolve', async () => {
+    expect(map(x => x + 1)(Promise.resolve([null, 1]))).resolves.toStrictEqual([
+      null,
+      2
+    ]);
+  });
+
+  it('works with promises that fail', async () => {
+    expect(
+      map(x => x + 1)(Promise.resolve([new Error('Boop!'), null]))
+    ).resolves.toStrictEqual([new Error('Boop!'), null]);
+  });
 });
 
 describe('flatMap', () => {

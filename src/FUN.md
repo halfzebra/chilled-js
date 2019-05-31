@@ -20,7 +20,7 @@ function parseInt(i) {
 }
 ```
 
-We could define a function for transforming the value inside the tuple, when the computation was successful:
+We could define a function for transforming the value inside the tuple when the computation was successful:
 
 ```js
 function map(fn, [ err, ok ]) {
@@ -30,7 +30,7 @@ function map(fn, [ err, ok ]) {
 const [ err, ok ] = map(obj => obj.user === 'Max', parseJson(rawJson)) // true | false
 ```
 
-What if computation we want to apply to a value also produces a tuple with error or result?
+What if computation we want to apply to value also produces a tuple with error or result?
 We would need a function for flattening the result, so we don't get an inconvenient nested structure like `[ err1, [ err2, ok ] ]`.
 
 Let's define `flatMap` function for checking if our cupcake shop can sell the requested amount of cupcakes:
@@ -44,7 +44,7 @@ flatMap(
 ) // Error: Sorry, we don't have more cupcakes
 ```
 
-The last use-case is the one where we don't really care about the error, because we have a good defaul value for replacing faulty input.
+The last use-case is the one where we don't really care about the error, because we have a good default value for replacing faulty input.
 Let's define a `withDefault` function, which can take a tuple and return a default value if the tuple contained an error.
 
 ```js
@@ -63,7 +63,9 @@ This is where `pipe` comes into play!
 
 ## Async
 
-This is how async code might look with `chill`ed functions.
+Adding the support for seamless promise handling is complicating the library.
+
+This is how async code might look with `chill`'ed functions.
 
 ```
 const fetchUser = id => fetch(...)
