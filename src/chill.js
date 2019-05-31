@@ -2,7 +2,7 @@
  * @param obj {?}
  * @returns {boolean}
  */
-function isPromise(obj) {
+function isPromiseLike(obj) {
   return (
     !!obj &&
     (typeof obj === 'object' || typeof obj === 'function') &&
@@ -36,7 +36,7 @@ function fromPromise(p) {
 function apply(fn, args) {
   try {
     const result = fn.apply(null, args);
-    return isPromise(result) ? fromPromise(result) : success(result);
+    return isPromiseLike(result) ? fromPromise(result) : success(result);
   } catch (err) {
     return fail(err);
   }
@@ -52,5 +52,6 @@ module.exports = {
   chill,
   success,
   fail,
-  fromPromise
+  fromPromise,
+  isPromiseLike
 };
