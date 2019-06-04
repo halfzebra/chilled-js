@@ -48,17 +48,6 @@ function map(fn) {
   return v => (isPromiseLike(v) ? v.then(apply) : apply.call(null, v));
 }
 
-function pipe(...fns) {
-  if (fns.length === 0) {
-    throw new Error(
-      'pipe: please pass at least one function to pipe the value through.'
-    );
-  }
-  return function(arg) {
-    return fns.reduce((acc, curr) => curr.call(null, log.off('acc', acc)), arg);
-  };
-}
-
 function mapError(fn) {
   if (!isFunction(fn)) {
     throw new Error('mapError: needs a function to transform the error.');
@@ -96,6 +85,30 @@ function flatMap(fn) {
 function withDefault(v) {
   return function(m) {
     return isError(m) ? v : snd(m);
+  };
+}
+
+function pipe(...fns) {
+  if (fns.length === 0) {
+    throw new Error(
+      'pipe: please pass at least one function to pipe the value through.'
+    );
+  }
+  return function(arg) {
+    return fns.reduce((acc, curr) => curr.call(null, log.off('acc', acc)), arg);
+  };
+}
+
+function id(x) {
+  return x;
+}
+
+function branch(predicate, left = id, right = id) {
+  if (!isFunction(predicate)) {
+    throw new Error('branch: needs at least a predicate to work')
+  }
+  return function(x) {
+    return predicate(x) ? left(x) : right(x);
   };
 }
 
