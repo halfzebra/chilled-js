@@ -61,13 +61,28 @@ withDefault(5, parseInt('Hello :)') // 5
 This is all great, but what if we want to combine those functions and build pipelines that can take a tuple and perform many operations on it.
 This is where `pipe` comes into play!
 
-## Async
+```js
+const process = pipe(
+  map(x => x + 1),
+  flatMap(
+    x => x > 2
+      ? [ new Error(`Sorry, we don not have more cupcakes`), null ]
+      : [ null, x + 1 ],
+    [ null, 3 ]
+  ),
+  withDefault(5)
+)
+
+process([ null, 10 ])
+```
+
+### Async
 
 Adding the support for seamless promise handling is complicating the library.
 
 This is how async code might look with `chill`'ed functions.
 
-```
+```js
 const fetchUser = id => fetch(...)
 
 const v = await pipe(
