@@ -105,7 +105,7 @@ function id(x) {
 
 function branch(predicate, left = id, right = id) {
   if (!isFunction(predicate)) {
-    throw new Error('branch: needs at least a predicate to work')
+    throw new Error('branch: please pass a predicate to branch on');
   }
   return function(x) {
     return predicate(x) ? left(x) : right(x);
@@ -118,5 +118,7 @@ module.exports = {
   flatMap,
   withDefault,
   pipe,
+  branch,
+  id,
   log
 };

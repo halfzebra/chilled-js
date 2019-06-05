@@ -1,4 +1,12 @@
-const { map, flatMap, withDefault, mapError, pipe, log } = require('../fun');
+const {
+  map,
+  flatMap,
+  withDefault,
+  mapError,
+  pipe,
+  branch,
+  id
+} = require('../fun');
 
 describe('map', () => {
   it('should transform the value', () => {
@@ -140,5 +148,43 @@ describe('pipe', () => {
     );
 
     expect(p([null, '10'])).toBe(11);
+  });
+});
+
+describe('branch', () => {
+  it('to pick left function if predicate returns true', () => {
+    const left = jest.fn(id);
+    const right = jest.fn(id);
+
+    const branchFn = branch(() => true, left, right);
+
+    branchFn(1);
+
+    expect(left).toHaveBeenCalledWith(1);
+    expect(right).not.toHaveBeenCalled();
+  });
+
+  it('to pick right function if predicate returns true', () => {
+    const left = jest.fn(id);
+    const right = jest.fn(id);
+
+    const branchFn = branch(() => false, left, right);
+
+    branchFn(1);
+
+    expect(right).toHaveBeenCalledWith(1);
+    expect(left).not.toHaveBeenCalled();
+  });
+
+  it('should throw if predicate is not specified', () => {
+    expect(() => branch()).toThrow('please pass a predicate to branch on');
+  });
+
+  it('should pass the parameter to the predicate', () => {
+    const predicate = jest.fn();
+
+    branch(predicate)('Hello');
+
+    expect(predicate).toHaveBeenCalledWith('Hello');
   });
 });
