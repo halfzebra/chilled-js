@@ -27,8 +27,7 @@ function log(label, x) {
   return x;
 }
 
-// XXX: maybe this not needed.
-// Similar to it.skip in test runners, allows for quick disabling of logging.
+// XXX: experimental synax for disablint the logger.
 log.off = function off(label, x) {
   if (!x) {
     return label;

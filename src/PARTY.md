@@ -12,7 +12,7 @@ partial(fn, _, _, _)
 x => y => z => fn(x, y, z)
 (x, y) => z => fn(x, y, z)
 x => (y, z) => fn(x, y, z)
-(x, y, z) => fn(x, y, z)
+( x, y, z ) => fn(x, y, z)
 ```
 
 ## Example
