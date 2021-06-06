@@ -6,6 +6,6 @@
     "test:ci": "jest --ci"
   },
   "devDependencies": {
-    "jest": "24.9.0"
+    "jest": "25.0.0"
   }
 }
